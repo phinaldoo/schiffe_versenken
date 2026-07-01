@@ -265,9 +265,9 @@ public class BattleshipGUI extends JFrame {
     }
     
     private JDialog createSettingsDialog() {
-        final int dialogWidth = 560;
-        final int dialogHeight = 470;
-        final int dialogCornerRadius = 28;
+        final int dialogWidth = 500;
+        final int dialogHeight = 290;
+        final int dialogCornerRadius = 26;
 
         JDialog dialog = new JDialog(this, true);
         dialog.setUndecorated(true);
