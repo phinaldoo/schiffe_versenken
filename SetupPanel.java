@@ -330,7 +330,7 @@ public class SetupPanel extends JPanel {
         }
 
         if (allShipsPlaced()) {
-            return;
+            clearPlacedShipsForReroll();
         }
 
         Random random = new Random(seed);
@@ -424,6 +424,14 @@ public class SetupPanel extends JPanel {
             target.setPlaced(false);
         }
         currentPlacementIndex = findNextUnplacedIndex();
+    }
+
+    private void clearPlacedShipsForReroll() {
+        for (PlacementTarget target : placementTargets) {
+            currentGrid.removeShip(target.getShipName());
+            target.setPlaced(false);
+        }
+        currentPlacementIndex = 0;
     }
 
     private static final class PlacementTarget {
