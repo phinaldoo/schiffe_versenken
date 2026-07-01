@@ -1,13 +1,19 @@
 import javax.swing.*;
+import javax.imageio.ImageIO;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
 public class BattleshipGUI extends JFrame {
+    private static final String APP_ICON_PATH = "image.png";
+
     // Colors
     public static final Color OCEAN_DARK = new Color(15, 32, 56);
     public static final Color OCEAN_MEDIUM = new Color(22, 54, 92);
@@ -54,6 +60,7 @@ public class BattleshipGUI extends JFrame {
     
     public BattleshipGUI() {
         setTitle("Schiffe Versenken");
+        configureAppIcon();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(1200, 800));
         setPreferredSize(new Dimension(1400, 900));
@@ -363,6 +370,34 @@ public class BattleshipGUI extends JFrame {
         button.setOpaque(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         return button;
+    }
+
+    private void configureAppIcon() {
+        BufferedImage appIcon = loadAppIcon();
+        if (appIcon == null) {
+            return;
+        }
+
+        setIconImage(appIcon);
+
+        if (Taskbar.isTaskbarSupported()) {
+            Taskbar taskbar = Taskbar.getTaskbar();
+            if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
+                taskbar.setIconImage(appIcon);
+            }
+        }
+    }
+
+    private BufferedImage loadAppIcon() {
+        try {
+            File iconFile = new File(APP_ICON_PATH);
+            if (!iconFile.isFile()) {
+                return null;
+            }
+            return ImageIO.read(iconFile);
+        } catch (IOException | UnsupportedOperationException | SecurityException e) {
+            return null;
+        }
     }
     
     
