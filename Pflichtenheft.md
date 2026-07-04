@@ -73,7 +73,7 @@ Die Architektur wurde so umgesetzt, dass:
 
 ---
 
-## 6. Fachliches Domänenmodell
+## 6. Engine-Modell
 
 ## 6.1 Übersicht
 
