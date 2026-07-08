@@ -1,3 +1,5 @@
+package model;
+
 public final class ShipType {
     private final String name;
     private final int length;

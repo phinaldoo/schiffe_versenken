@@ -1,3 +1,5 @@
+package model;
+
 public final class ShotReport {
     private final ShotResult result;
     private final Coordinate coordinate;

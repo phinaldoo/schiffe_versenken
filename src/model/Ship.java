@@ -1,13 +1,15 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SHIP {
+public class Ship {
     private final String name;
     private final List<Coordinate> coordinates;
     private final boolean[] hits;
 
-    public SHIP(String name, List<Coordinate> coordinates) {
+    public Ship(String name, List<Coordinate> coordinates) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Ship name must not be empty.");
         }

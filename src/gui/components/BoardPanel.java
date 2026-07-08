@@ -1,3 +1,11 @@
+package gui.components;
+
+import gui.BattleshipGUI;
+import model.Coordinate;
+import model.Grid;
+import model.Orientation;
+import model.Ship;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -6,7 +14,7 @@ import java.util.List;
 
 public class BoardPanel extends JPanel {
     
-    private GRID grid;
+    private Grid grid;
     private int boardSize;
     private boolean isOpponentView;
     private boolean isInteractive;
@@ -96,7 +104,7 @@ public class BoardPanel extends JPanel {
         return null;
     }
     
-    public void setGrid(GRID grid) {
+    public void setGrid(Grid grid) {
         this.grid = grid;
         repaint();
     }
@@ -181,7 +189,7 @@ public class BoardPanel extends JPanel {
             
             // Check if ship at this cell is sunk
             if (hasShip && wasShot) {
-                for (SHIP ship : grid.getShips()) {
+                for (Ship ship : grid.getShips()) {
                     if (ship.occupies(coord) && ship.isSunk()) {
                         isSunk = true;
                         break;

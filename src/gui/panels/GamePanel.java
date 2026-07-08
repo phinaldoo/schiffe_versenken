@@ -1,3 +1,13 @@
+package gui.panels;
+
+import gui.BattleshipGUI;
+import gui.components.BoardPanel;
+import gui.components.ModernButton;
+import gui.components.SettingsIconButton;
+import model.Coordinate;
+import model.Game;
+import model.ShotReport;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -188,7 +198,7 @@ public class GamePanel extends JPanel {
     }
     
     public void refreshBoards() {
-        GAME game = parent.getGame();
+        Game game = parent.getGame();
         ownBoard.setGrid(game.getActivePlayerGrid());
         enemyBoard.setGrid(game.getOpponentGrid());
         
@@ -201,7 +211,7 @@ public class GamePanel extends JPanel {
     }
     
     private void updateTurnInfo() {
-        GAME game = parent.getGame();
+        Game game = parent.getGame();
         turnLabel.setText(game.getActivePlayerName() + " ist am Zug");
         statusLabel.setText("Wähle ein Ziel auf dem gegnerischen Feld");
     }
@@ -209,7 +219,7 @@ public class GamePanel extends JPanel {
     private void handleShot(int row, int col) {
         if (!canShoot) return;
         
-        GAME game = parent.getGame();
+        Game game = parent.getGame();
         Coordinate target = new Coordinate(row, col);
         
         // Check if already shot
@@ -267,7 +277,7 @@ public class GamePanel extends JPanel {
     }
     
     private void endTurn() {
-        GAME game = parent.getGame();
+        Game game = parent.getGame();
         game.switchTurn();
         parent.endTurn();
     }

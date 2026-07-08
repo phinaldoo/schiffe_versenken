@@ -1,18 +1,20 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class GRID {
+public class Grid {
     private final String username;
     private final int size;
-    private final List<SHIP> ships;
+    private final List<Ship> ships;
     private final int[][] shipIndexAtCell;
     private final boolean[][] shotsTaken;
     private int placedShipCells;
     private int hitShipCells;
 
-    public GRID(String username, int size) {
+    public Grid(String username, int size) {
         if (username == null || username.trim().isEmpty()) {
             throw new IllegalArgumentException("Username must not be empty.");
         }
@@ -21,7 +23,7 @@ public class GRID {
         }
         this.username = username.trim();
         this.size = size;
-        this.ships = new ArrayList<SHIP>();
+        this.ships = new ArrayList<Ship>();
         this.shipIndexAtCell = new int[size][size];
         this.shotsTaken = new boolean[size][size];
         this.placedShipCells = 0;
@@ -36,11 +38,11 @@ public class GRID {
         return size;
     }
 
-    public List<SHIP> getShips() {
+    public List<Ship> getShips() {
         return Collections.unmodifiableList(ships);
     }
 
-    public SHIP getShipAt(Coordinate c) {
+    public Ship getShipAt(Coordinate c) {
         Coordinate checked = Coordinate.validateBounds(c, size);
         int shipIndex = shipIndexAtCell[checked.getRow()][checked.getColumn()];
         if (shipIndex == 0) {
@@ -67,7 +69,7 @@ public class GRID {
         return true;
     }
 
-    public SHIP placeShip(String shipName, Coordinate start, Orientation orientation, int length) {
+    public Ship placeShip(String shipName, Coordinate start, Orientation orientation, int length) {
         if (length < 2) {
             throw new IllegalArgumentException("Ship length must be at least 2.");
         }
@@ -75,7 +77,7 @@ public class GRID {
         if (!canPlaceShip(start, orientation, length)) {
             throw new IllegalArgumentException("Ship placement collides or touches another ship.");
         }
-        SHIP ship = new SHIP(shipName, cells);
+        Ship ship = new Ship(shipName, cells);
         ships.add(ship);
         int shipIndex = ships.size();
         for (Coordinate c : cells) {
@@ -146,7 +148,7 @@ public class GRID {
         }
 
         for (int i = 0; i < ships.size(); i++) {
-            SHIP ship = ships.get(i);
+            Ship ship = ships.get(i);
             if (ship.getName().equals(shipName.trim())) {
                 placedShipCells -= ship.getCoordinates().size();
                 ships.remove(i);
@@ -169,7 +171,7 @@ public class GRID {
             return new ShotReport(ShotResult.MISS, c, null, false);
         }
 
-        SHIP ship = ships.get(shipIndex - 1);
+        Ship ship = ships.get(shipIndex - 1);
         ship.registerHit(c);
         hitShipCells++;
         if (ship.isSunk()) {

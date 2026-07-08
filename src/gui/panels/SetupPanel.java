@@ -1,3 +1,15 @@
+package gui.panels;
+
+import gui.BattleshipGUI;
+import gui.components.BoardPanel;
+import gui.components.ModernButton;
+import gui.components.SettingsIconButton;
+import model.Coordinate;
+import model.Grid;
+import model.Orientation;
+import model.Ship;
+import model.ShipType;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -19,7 +31,7 @@ public class SetupPanel extends JPanel {
     private SettingsIconButton settingsButton;
 
     private int currentPlayerIndex;
-    private GRID currentGrid;
+    private Grid currentGrid;
     private Orientation currentOrientation = Orientation.HORIZONTAL;
     private List<ShipType> fleet;
     private List<PlacementTarget> placementTargets;
@@ -275,7 +287,7 @@ public class SetupPanel extends JPanel {
     }
 
     private void pickUpShipForEditing(Coordinate coordinate) {
-        SHIP ship = currentGrid.getShipAt(coordinate);
+        Ship ship = currentGrid.getShipAt(coordinate);
         if (ship == null) {
             return;
         }

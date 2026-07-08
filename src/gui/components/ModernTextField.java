@@ -1,3 +1,7 @@
+package gui.components;
+
+import gui.BattleshipGUI;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;

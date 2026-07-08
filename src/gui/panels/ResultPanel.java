@@ -1,3 +1,8 @@
+package gui.panels;
+
+import gui.BattleshipGUI;
+import gui.components.ModernButton;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;

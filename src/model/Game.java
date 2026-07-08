@@ -1,28 +1,30 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GAME {
-    private final GRID playerOneGrid;
-    private final GRID playerTwoGrid;
+public class Game {
+    private final Grid playerOneGrid;
+    private final Grid playerTwoGrid;
     private final List<ShipType> fleetDefinition;
     private int activePlayer;
     private boolean gameOver;
     private String winnerName;
 
-    public GAME(String playerOneName, String playerTwoName, int boardSize, List<ShipType> fleetDefinition) {
+    public Game(String playerOneName, String playerTwoName, int boardSize, List<ShipType> fleetDefinition) {
         if (fleetDefinition == null || fleetDefinition.isEmpty()) {
             throw new IllegalArgumentException("Fleet definition must not be empty.");
         }
-        this.playerOneGrid = new GRID(playerOneName, boardSize);
-        this.playerTwoGrid = new GRID(playerTwoName, boardSize);
+        this.playerOneGrid = new Grid(playerOneName, boardSize);
+        this.playerTwoGrid = new Grid(playerTwoName, boardSize);
         this.fleetDefinition = new ArrayList<ShipType>(fleetDefinition);
         this.activePlayer = 0;
         this.gameOver = false;
         this.winnerName = null;
     }
 
-    public GRID getPlayerGrid(int playerIndex) {
+    public Grid getPlayerGrid(int playerIndex) {
         if (playerIndex == 0) {
             return playerOneGrid;
         }
@@ -32,11 +34,11 @@ public class GAME {
         throw new IllegalArgumentException("Player index must be 0 or 1.");
     }
 
-    public GRID getActivePlayerGrid() {
+    public Grid getActivePlayerGrid() {
         return getPlayerGrid(activePlayer);
     }
 
-    public GRID getOpponentGrid() {
+    public Grid getOpponentGrid() {
         return getPlayerGrid(1 - activePlayer);
     }
 

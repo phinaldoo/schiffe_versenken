@@ -1,5 +1,5 @@
 public class BattleshipGUI {
     public static void main(String[] args) {
-        SourceLauncher.run("gui.BattleshipGUI", args);
+        gui.BattleshipGUI.main(args);
     }
 }

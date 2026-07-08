@@ -6,14 +6,24 @@ from pathlib import Path
 
 
 def main() -> int:
-    project_dir = Path(__file__).resolve().parent
-    java_files = sorted(project_dir.glob("*.java"))
+    project_dir = Path(__file__).resolve().parents[2]
+    source_dir = project_dir / "src"
+    bin_dir = project_dir / "bin"
+    java_files = sorted(source_dir.rglob("*.java"))
 
     if not java_files:
-        print("Keine Java-Dateien im Projektverzeichnis gefunden.", file=sys.stderr)
+        print("Keine Java-Dateien im src-Verzeichnis gefunden.", file=sys.stderr)
         return 1
 
-    compile_cmd = ["javac", "-encoding", "UTF-8", *[str(path.name) for path in java_files]]
+    bin_dir.mkdir(exist_ok=True)
+    compile_cmd = [
+        "javac",
+        "-encoding",
+        "UTF-8",
+        "-d",
+        "bin",
+        *[str(path.relative_to(project_dir)) for path in java_files],
+    ]
     print("Kompiliere Java-Dateien ...")
     compile_result = subprocess.run(
         compile_cmd,
@@ -25,7 +35,7 @@ def main() -> int:
 
     print("Starte Main ...")
     run_result = subprocess.run(
-        ["java", "BattleshipGUI"],
+        ["java", "-cp", "bin", "BattleshipGUI"],
         cwd=project_dir,
     )
     return run_result.returncode

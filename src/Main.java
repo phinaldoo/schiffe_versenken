@@ -1,5 +1,5 @@
 public class Main {
     public static void main(String[] args) {
-        SourceLauncher.run("console.ConsoleGame", args);
+        console.ConsoleGame.main(args);
     }
 }
